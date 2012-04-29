@@ -1,4 +1,5 @@
 *.[oa]
 *~
-a.exe
-a.out
+*.exe
+*.out
+*.class
