@@ -3,7 +3,7 @@ class A5 {
         if (args.length != 10) {
             System.out.println("Aufruf mit 10 ganzen Zahlen");
         } else {
-            int i, wert = 1;
+         	int i, wert = 1;
             int[] folge = new int[10];
             for (i = 0; i < args.length; i++)
                 folge[i] = Integer.parseInt(args[i]);
