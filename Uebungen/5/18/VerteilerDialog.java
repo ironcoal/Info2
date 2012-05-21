@@ -48,6 +48,8 @@ class VerteilerDialog extends Dialog implements ActionListener {
         pan1.add(pan2, BorderLayout.NORTH);
         pan1.add(pan3, BorderLayout.CENTER);
         add(pan1);
+
+        addWindowListener(new Closer());
     }
 
     public void actionPerformed(ActionEvent e) {
@@ -59,7 +61,13 @@ class VerteilerDialog extends Dialog implements ActionListener {
                 /* Hier Fehlerbehandlung möglich, wenn erwünscht */
             }
         } else if (e.getSource() == save) {
-            dispose();
+            System.exit(0);
+        }
+    }
+
+    protected static final class Closer extends WindowAdapter {
+        public void windowClosing(WindowEvent e) {
+            System.exit(0);
         }
     }
 
