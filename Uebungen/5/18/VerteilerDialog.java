@@ -1,6 +1,8 @@
 import java.awt.Dialog.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.util.ArrayList;
+import java.util.Iterator;
 
 class VerteilerDialog extends Dialog implements ActionListener {
 	
@@ -13,22 +15,25 @@ class VerteilerDialog extends Dialog implements ActionListener {
 	public Dialog verteiler; 
 
 	public VerteilerDialog(Frame f, Adressbuch adress) {
-		super(f, "Mailverteilererstellen", true);
+		super(f, "Mailverteiler erstellen");
 		setSize(500, 300);
-		Container cp = getContentPain();
-		verteiler = new Dialog("Mailverteiler erstellen");
+		
+		/* Initialisieren der Dialogkomponenten */
+		verteiler = new Dialog(f, "Mailverteiler erstellen");
 		lab = new Label("Name des Verteilers");
 		tfname = new TextField();
-		ltadress = new List();
-		ltverteiler = new List();
+		ltadress = new List(10, false);
+		ltverteiler = new List(10, false);
 		save = new Button("Speichern");
 		arrow = new Button(">>");
 
-		list
-	}
+		Iterator it = adress.iterator();
+		while (it.hasNext()) {
+			System.out.print(it.next().getName());
+			//ltadress.add(it.next().getName());
+		}
 
-	public static List showDialog(Frame f, Adressbuch adress) {
-		VerteilerDialog verteilerDialog = new VerteilerDialog()
+
 	}
 
 	public void actionPerformed(ActionEvent e) {
