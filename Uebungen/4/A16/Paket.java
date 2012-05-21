@@ -1,13 +1,20 @@
-class Paket() {
-    private int laenge;
-    private int breite;
-    private int hoehe;
-    private int gewicht;
+class Paket {
+
+    public int laenge;
+    public int breite;
+    public int hoehe;
+    public int gewicht;
     
     public Paket(int laenge, int breite, int hoehe, int gewicht) {
-    
+        if (this.checkPaketdaten(laenge, breite, hoehe, gewicht)) {
+            this.laenge = laenge;
+            this.breite = breite;
+            this.hoehe = hoehe;
+            this.gewicht = gewicht;
+        } else
+            System.out.println("Fehler - Paketattribute entsprechen nicht den Vorgaben!");
     }
-    private boolean checkPaketdaten(int laenge, int breite, int hoehe, int gewicht) {
+    public boolean checkPaketdaten(int laenge, int breite, int hoehe, int gewicht) {
         return (laenge > 0 && breite > 0 && hoehe > 0 && gewicht > 0);
     }
     private int calcPaketklasse() {
@@ -28,14 +35,15 @@ class Paket() {
             return 4;
     }
     public boolean equals(Object o) {
-        return (o.typeOf(Paket) && (o.calcPaketklasse() == calcPaketklasse()));
+        return ((o instanceof Paket) && (((Paket) o).calcPaketklasse() == this.calcPaketklasse()));
     }
     public String toString() {
         int klasse = calcPaketklasse();
         if (klasse == 0)
             return "Sperrgut: Gewicht zu hoch";
         else if (klasse == 4)
-            return "Sperrgut: Paket zu groﬂ";
+            return "Sperrgut: Paket zu gross";
         else 
-            return "Paketklasse: " +  klasse.toString();
+            return "Paketklasse: " + klasse;
     }
+}

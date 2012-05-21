@@ -1,13 +1,14 @@
-import java.util.date;
+import java.util.Date;
+
 class Highscore {
 	private String name;
 	private int score;
-	private datum Date;
+	private Date datum;
 	
-	Higscore(String name, int score, Date datum) {
-	this.name = name;
-	this.score = score;
-	this.datum = datum;
+	Highscore(String name, int score, Date datum) {
+		this.name = name;
+		this.score = score;
+		this.datum = datum;
 	}
 	
 	public String getName() {

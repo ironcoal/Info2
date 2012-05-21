@@ -5,7 +5,6 @@ public class HighscoreContainer implements Iterable<Highscore> {
 
 	private Vector<Highscore> highscore_liste;
 	private static HighscoreContainer unique;
-	private int anzahl = 0;
 	  
 	private HighscoreContainer() {
 		highscore_liste = new Vector<Highscore>();
@@ -18,29 +17,48 @@ public class HighscoreContainer implements Iterable<Highscore> {
     }
 	  
     /* Fuegt den neuen Highscore so in den Vektor ein, dass die Highscores der Groesse nach
-     * geordnet sind, angefangen mit dem hoechsten */
+     * geordnet sind, angefangen mit dem Hoechsten */
 	public void addHighscore(Highscore h) {
-        if (!highscore_liste.contains(0))
-            highscore_liste.addElement(0)
+		int size = highscore_liste.size();
+		boolean found = false;
+        if (size == 0)
+            highscore_liste.add(0, h);
         else {
-            for (int i = 0; i < highscore_liste.size(); i++) {
-                if (highscore_liste.ElementAt(i).getScore() < h.getScore())
-                    highscore_liste.addElement(i, h);
-            } 
+            for (int i = 0; i < size; i++) {
+                if (highscore_liste.elementAt(i).getScore() < h.getScore()) {
+                    highscore_liste.add(i, h);
+                    found = true;
+                	break;
+                }
+            }
+            if (!found)
+            	highscore_liste.add(size, h);
+        } 
 	}	
 	  
-	public void removeAllHighscore(Highscore h) {
+	public void removeAllHighscore() {
         highscore_liste.removeAll(highscore_liste);
-        anzahl = 0;
     }
 	  
-	public Highscore getHighscore(int i) {
-		return highscore_liste.elementAt(i);
+	public Highscore getHighscoreAt(int i) {
+		try {
+            return highscore_liste.elementAt(i);
+        }
+        catch(ArrayIndexOutOfBoundsException e) {
+            System.out.println("Index nicht vorhanden!");
+            return null;
+        }
+	}
+	
+	public void removeHighscoreAt(int i) {
+		if (i >= 0 && highscore_liste.size() > i)
+			highscore_liste.removeElementAt(i);
+		else
+			System.out.println("Element nicht vorhanden!");
 	}
 
-    /*
-	public Iterator<Higscore> iterator() {
+	public Iterator<Highscore> iterator() {
 		return highscore_liste.iterator();
-	} */
+	} 
 
 }
