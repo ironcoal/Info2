@@ -5,41 +5,64 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 class VerteilerDialog extends Dialog implements ActionListener {
-	
-	private Label lab;
-	private TextField tfname;
-	private List ltadress;
-	private List ltverteiler;
-	private Button save;
-	private Button arrow;
-	public Dialog verteiler; 
+    
+    private TextField tf_name;
+    private List lt_adress;
+    private List lt_verteiler;
+    private Button save;
+    private Button arrow;
+    public Dialog verteiler; 
 
-	public VerteilerDialog(Frame f, Adressbuch adress) {
-		super(f, "Mailverteiler erstellen");
-		setSize(500, 300);
-		
-		/* Initialisieren der Dialogkomponenten */
-		verteiler = new Dialog(f, "Mailverteiler erstellen");
-		lab = new Label("Name des Verteilers");
-		tfname = new TextField();
-		ltadress = new List(10, false);
-		ltverteiler = new List(10, false);
-		save = new Button("Speichern");
-		arrow = new Button(">>");
+    public VerteilerDialog(Frame f, Adressbuch adress) {
+        super(f, "Mailverteiler erstellen");
+        
+        /* Initialisieren der Dialogkomponenten */
+        Panel pan1 = new Panel(new BorderLayout());
+        Panel pan2 = new Panel();
+        Panel pan3 = new Panel();
 
-		Iterator it = adress.iterator();
-		while (it.hasNext()) {
-			System.out.print(it.next().getName());
-			//ltadress.add(it.next().getName());
-		}
+        verteiler = new Dialog(f, "Mailverteiler erstellen");
+        tf_name = new TextField();
+        lt_adress = new List(10, false);
+        lt_verteiler = new List(10, false);
+        save = new Button("Speichern");
+        arrow = new Button(">>");
+        arrow.addActionListener(this);
+        save.addActionListener(this);
+
+        tf_name.setPreferredSize(new Dimension(80,25));
+
+        pan2.add(new Label("Name des Verteilers"));
+        pan2.add(tf_name);
+        pan2.add(save);
+
+        Iterator<Kontakt> it = adress.iterator();
+        while (it.hasNext()) {
+            lt_adress.add(it.next().getName());
+        }
+
+        pan3.add(lt_adress);
+        pan3.add(arrow);
+        pan3.add(lt_verteiler);
+
+        pan1.add(pan2, BorderLayout.NORTH);
+        pan1.add(pan3, BorderLayout.CENTER);
+        add(pan1);
+    }
+
+    public void actionPerformed(ActionEvent e) {
+        if (e.getSource() == arrow) {
+            if (lt_adress.getSelectedItem() != null) {
+                lt_verteiler.add(lt_adress.getSelectedItem());
+                lt_adress.remove(lt_adress.getSelectedItem());
+            } else {
+                /* Hier Fehlerbehandlung möglich, wenn erwünscht */
+            }
+        } else if (e.getSource() == save) {
+            dispose();
+        }
+    }
 
 
-	}
-
-	public void actionPerformed(ActionEvent e) {
-		if (e.getSource() == arrow) {
-
-		}
-	}
 
 }
