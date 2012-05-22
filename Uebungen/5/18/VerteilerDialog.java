@@ -61,7 +61,7 @@ class VerteilerDialog extends Dialog implements ActionListener {
                 /* Hier Fehlerbehandlung möglich, wenn erwünscht */
             }
         } else if (e.getSource() == save) {
-            System.exit(0);
+            /* Hier Ereignisbehandlung für Button "Speichern" */
         }
     }
 
