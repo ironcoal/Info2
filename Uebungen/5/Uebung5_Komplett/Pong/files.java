@@ -1,1 +1,0 @@
-Ball.java Configuration.java GameArea.java GameConfigurationDialog.java Highscore.java HighscoreContainer.java HighscoreDialog.java Main.java MainWindow.java Paddle.java Player.java PlayerConfigurationDialog.java Pong.java PongDisplay.java WarnDialog.java

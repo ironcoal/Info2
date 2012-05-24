@@ -1,1 +1,0 @@
-A18.java Kontakt.java VerteilerDialog.java Adressbuch.java
