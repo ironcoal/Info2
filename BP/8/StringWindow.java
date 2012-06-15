@@ -1,30 +1,47 @@
+import java.awt.*;
+import java.util.*;
 
-public class StringWindow extends Dialog implements Observer{
-	boolean komplement;
-	Label lr;
-	Label lg;
-	Label lb;
+public class StringWindow extends Dialog implements Observer {
+	private boolean komplement;
+	private Label lr;
+	private Label lg;
+	private Label lb;
 
 	public StringWindow(Frame owner, Farbe farbe, boolean komplement) {
-		super(owner);
-		this.komplement = komplement;
-		setzeStrings(farbe);
+		super(owner, "Farbe", false);
+		setLayout(new GridLayout(1,3));
+		lr = new Label("sd");
+		add(lr);
+		lg = new Label("sd");
+		add(lg);
+		lb = new Label("sdsd");
+		add(lb);
 
-		lr = new Label;
-		lg = new Label;
-		lb = new Label;
+		this.komplement = komplement;
+		farbe.addObserver(this);
+		this.setzeStrings(farbe);
+
+
+
+		setPreferredSize(new Dimension(250, 50));
+		pack();
+		setVisible(true);
 	}
-	public update(Observable farbe, Object obj) {
+	public void update(Observable farbe, Object obj) {
 		setzeStrings((Farbe) farbe);
 	}
-	private setzeStrings(Farbe farbe) {
-		if (komplement)
-			lr.setText(255 - farbe.getR());
-			lg.setText(255 - farbe.getG());
-			lb.setText(255 - farbe.getB());
-		else
-			lr.setText(farbe.getR());
-			lg.setText(farbe.getG());
-			lb.setText(farbe.getB());
+	private void setzeStrings(Farbe farbe) {
+		
+		if (komplement) {
+			Color c = farbe.getCk();
+			lr.setText(Integer.toString(c.getRed()));
+			lg.setText(Integer.toString(c.getGreen()));
+			lb.setText(Integer.toString(c.getBlue()));
+		} else {
+			Color c = farbe.getC();
+			lr.setText(Integer.toString(c.getRed()));
+			lg.setText(Integer.toString(c.getGreen()));
+			lb.setText(Integer.toString(c.getBlue()));
+		}
 	}
 }	

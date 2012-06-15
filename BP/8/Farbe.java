@@ -1,23 +1,31 @@
-
+import java.util.*;
+import java.awt.*;
 
 public class Farbe extends Observable {
 	private int r = 0;
 	private int b = 0;
-	private int g = 0;
+	private int g = 255;
 
-	public setR(int v){
-		r = v;	
+
+	public void setR(int v){
+		r = v;
+		this.setChanged();
+        this.notifyObservers();
 	}
-	public setG(int v){
+	public void setG(int v){
 		g = v;	
+		this.setChanged();
+        this.notifyObservers();
 	}
-	public setB(int v){
+	public void setB(int v){
 		b = v;	
+		this.setChanged();
+        this.notifyObservers();
 	}
-	public Color getC(int v){
-		return Color(r,g,b);
+	public Color getC(){
+		return new Color(r,g,b);
 	}
 	public Color getCk(){
-		return Color(256-r,256-g,256-b);
+		return new Color(255-r,255-g,255-b);
 	}
 }
