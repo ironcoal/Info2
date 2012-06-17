@@ -1,7 +1,8 @@
 import java.sql.*;
 import java.util.*;
 
-public class DataBase implements Iterable<Table>{
+public class DataBase implements Iterable<Table>
+{
 	private String driver = "com.mysql.jdbc.Driver";
 	private String protocol = "jdbc:mysql";
 	private String server = "aiomr.informatik.uni-augsburg.de";
@@ -21,10 +22,15 @@ public class DataBase implements Iterable<Table>{
 			System.out.println("Datenbank \"" + name + "\" hat folgenden Inhalt: ");
 			collectInformationFromDataBase();
 			for (Table t: table_list) {
+				
 				System.out.println(t.getName());
-				Iterator<Column> col = t.iterator();
-				while (col.hasNext())
-					System.out.println("  - " + col.next().getName());
+				
+				for (Column co: t.column_list) {
+					System.out.println("  - " + co.getName());
+
+					for (Cell cl: co.cell_list)					
+						System.out.println("    - " + cl.getContent());
+				}
 			}
 		}
 	}
@@ -46,7 +52,7 @@ public class DataBase implements Iterable<Table>{
 			DatabaseMetaData meta = connection.getMetaData();
 			ResultSet tables = meta.getTables(null, null, null, null);
 			while (tables.next()) {
-				table_list.addElement(new Table(tables, meta));
+				table_list.addElement(new Table(tables, meta, connection));
 			}
 		} catch(Exception e) {
 			System.out.println("Fehler beim holen der Datenbank");

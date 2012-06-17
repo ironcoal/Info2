@@ -14,7 +14,6 @@ import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.sql.*;
-import com.mysql.jdbc.Driver;
 
 public class LoginDialog extends Dialog implements ActionListener {
 	private static final long serialVersionUID = 1702083272480108081L;
@@ -117,7 +116,7 @@ public class LoginDialog extends Dialog implements ActionListener {
 	      		Configuration.instance().setPlayer1Name(user);
 	      		return true;
 	      	}
-	      	new WarnDialog(this, "Nutzer nicht vorhanden!");
+	      	new WarnDialog(this, "Name oder Passwort falsch!");
 	      	return false;
 	    } catch (Exception e) {
 	    	new WarnDialog(this, "Fehler bei der Datenbankverbindung!");
@@ -141,8 +140,7 @@ public class LoginDialog extends Dialog implements ActionListener {
 		try {
 			Statement abfrage = c.createStatement();
 	      	String befehl = "select * from Users where " + 
-                "username = '" + user + "' and " +
-                "password = '" + password + "'";
+                "username = '" + user + "'";
 	      	ResultSet ergebnis = abfrage.executeQuery(befehl);
 	    	
 	      	if (!ergebnis.next()) {
@@ -150,7 +148,7 @@ public class LoginDialog extends Dialog implements ActionListener {
 		        abfrage.executeUpdate(befehl);
 		        return true;
 	      	} else {
-	      		new WarnDialog(this, "Eintrag schon vorhanden!");
+	      		new WarnDialog(this, "User schon vorhanden!");
 	      		return false;
 	      	}
 	    } catch (Exception e) {
