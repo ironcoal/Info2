@@ -1,2 +1,0 @@
-eclipse.preferences.version=1
-org.eclim.java.compile.args=["-cp /usr/share/java/mysql-jdbc/mysql-connector-java-bin.jar"]
